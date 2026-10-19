@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b1020" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Familiada — Buzzer</title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="stylesheet" href="/shared/styles.css" />
+    <link rel="stylesheet" href="/player/player.css" />
+  </head>
+  <body class="player">
+    <!-- EKRAN DOŁĄCZENIA -->
+    <section id="joinScreen" class="screen">
+      <div class="join-card">
+        <h1 class="join-logo">FAMILIADA</h1>
+        <p class="muted">Dołącz do gry</p>
+
+        <label class="field">
+          <span>Kod pokoju</span>
+          <input id="roomInput" type="text" maxlength="4" placeholder="ABCD" autocomplete="off" />
+        </label>
+
+        <label class="field">
+          <span>Twoje imię</span>
+          <input id="nameInput" type="text" maxlength="24" placeholder="np. Ania" autocomplete="off" />
+        </label>
+
+        <div class="team-picker">
+          <button class="team-btn team-a" data-team="A">
+            <span class="team-dot"></span>
+            <span id="teamALabel">Drużyna A</span>
+          </button>
+          <button class="team-btn team-b" data-team="B">
+            <span class="team-dot"></span>
+            <span id="teamBLabel">Drużyna B</span>
+          </button>
+        </div>
+
+        <button id="joinBtn" class="btn btn-primary join-submit">Dołącz</button>
+      </div>
+    </section>
+
+    <!-- EKRAN GRY -->
+    <section id="gameScreen" class="screen hidden">
+      <header class="player-header">
+        <div class="player-name" id="playerName">—</div>
+        <div class="player-team" id="playerTeam">—</div>
+      </header>
+
+      <main class="player-main">
+        <div class="status-text" id="statusText">Czekamy na start…</div>
+
+        <button id="buzzBtn" class="buzz-btn" disabled>
+          <span class="buzz-label">BUZZ</span>
+          <span class="buzz-hint" id="buzzHint">Czekaj…</span>
+        </button>
+
+        <div class="player-info" id="playerInfo"></div>
+      </main>
+
+      <footer class="player-footer">
+        <div class="mini-score">
+          <span id="miniTeamA">A</span>
+          <strong id="miniScoreA">0</strong>
+        </div>
+        <div class="mini-score">
+          <span id="miniTeamB">B</span>
+          <strong id="miniScoreB">0</strong>
+        </div>
+      </footer>
+    </section>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="/player/player.js"></script>
+  </body>
+</html>

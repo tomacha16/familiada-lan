@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Familiada — Tablica</title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="stylesheet" href="/shared/styles.css" />
+    <link rel="stylesheet" href="/tv/tv.css" />
+  </head>
+  <body class="tv">
+    <!-- GÓRNY PASEK: logo + runda -->
+    <header class="tv-header">
+      <div class="tv-logo">
+        <span class="logo-fam">FAMI</span><span class="logo-liada">LIADA</span>
+      </div>
+      <div class="tv-demo-badge hidden" id="demoBadge">TRYB DEMO</div>
+      <div class="tv-round" id="roundLabel">Lobby</div>
+    </header>
+
+    <main class="tv-main">
+      <!-- LOBBY -->
+      <section id="viewLobby" class="view">
+        <div class="lobby-grid">
+          <div class="lobby-qr">
+            <h2>Dołącz do gry</h2>
+            <div class="qr-frame">
+              <img id="qrImage" alt="Kod QR do dołączenia" />
+            </div>
+            <div class="room-code">
+              KOD POKOJU <strong id="roomCode">----</strong>
+            </div>
+            <p class="lobby-hint">Zeskanuj telefonem lub wejdź na adres z ekranu</p>
+            <div class="join-url" id="joinUrl"></div>
+          </div>
+          <div class="lobby-teams">
+            <div class="team-column team-a">
+              <h3 id="teamAName">Drużyna A</h3>
+              <ul id="teamAPlayers"></ul>
+            </div>
+            <div class="team-column team-b">
+              <h3 id="teamBName">Drużyna B</h3>
+              <ul id="teamBPlayers"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RUNDA: tablica z odpowiedziami -->
+      <section id="viewRound" class="view hidden">
+        <div class="question-banner">
+          <span class="question-label">PYTANIE</span>
+          <span class="question-text" id="questionText">Pytanie</span>
+        </div>
+
+        <div class="board-wrap">
+          <div class="board" id="answerBoard"></div>
+          <div class="strikes" id="strikes"></div>
+        </div>
+      </section>
+
+      <!-- FACE OFF -->
+      <section id="viewFaceOff" class="view hidden">
+        <div class="question-banner">
+          <span class="question-label">POJEDYNEK</span>
+          <span class="question-text" id="faceOffQuestion">Pytanie</span>
+        </div>
+        <div class="faceoff">
+          <div class="faceoff-title" id="faceOffTitle">Głowy rodzin — kto pierwszy?</div>
+          <div class="heads" id="buzzList"></div>
+        </div>
+      </section>
+
+      <!-- PODSUMOWANIE RUNDY -->
+      <section id="viewSummary" class="view hidden">
+        <div class="summary-title" id="summaryTitle">Koniec rundy</div>
+        <div class="summary-points" id="summaryPoints">0</div>
+        <div class="summary-team" id="summaryTeam"></div>
+      </section>
+
+      <!-- FINAŁ -->
+      <section id="viewFinal" class="view hidden">
+        <div class="final-title" id="finalTitle">Runda finałowa</div>
+        <div class="final-list" id="finalList"></div>
+        <div class="final-total" id="finalTotal"></div>
+      </section>
+
+      <!-- KONIEC GRY -->
+      <section id="viewGameOver" class="view hidden">
+        <div class="gameover-title">KONIEC GRY</div>
+        <div class="gameover-winner" id="winnerText"></div>
+        <div class="gameover-scores" id="finalScores"></div>
+      </section>
+    </main>
+
+    <!-- DOLNY PASEK: wyniki drużyn + bank -->
+    <footer class="tv-footer">
+      <div class="score-card team-a">
+        <span class="score-name" id="scoreAName">Drużyna A</span>
+        <span class="score-value" id="scoreA">0</span>
+      </div>
+      <div class="bank">
+        <span class="bank-label">BANK</span>
+        <span class="bank-value" id="potValue">0</span>
+      </div>
+      <div class="score-card team-b">
+        <span class="score-name" id="scoreBName">Drużyna B</span>
+        <span class="score-value" id="scoreB">0</span>
+      </div>
+    </footer>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="/tv/tv.js"></script>
+  </body>
+</html>

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b1020" />
+    <title>Familiada — Panel hosta</title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="stylesheet" href="/shared/styles.css" />
+    <link rel="stylesheet" href="/host/host.css" />
+  </head>
+  <body class="host">
+    <!-- LOGIN -->
+    <section id="loginScreen" class="login-screen">
+      <div class="login-card card">
+        <h1 class="login-logo">PANEL HOSTA</h1>
+        <p class="muted">Podaj PIN wyświetlony w konsoli serwera</p>
+        <input id="pinInput" type="password" inputmode="numeric" maxlength="6" placeholder="PIN" />
+        <button id="loginBtn" class="btn btn-primary">Zaloguj</button>
+        <p class="muted small">PIN znajdziesz w oknie terminala po starcie serwera</p>
+      </div>
+    </section>
+
+    <!-- PANEL -->
+    <section id="panelScreen" class="panel hidden">
+      <header class="host-header">
+        <div class="host-brand">FAMILIADA <span class="muted">host</span></div>
+        <div class="host-demo-badge hidden" id="hostDemoBadge">TRYB DEMO</div>
+        <div class="host-room">
+          Pokój: <strong id="roomCodeLabel">----</strong>
+          <button id="copyLinkBtn" class="btn btn-small">Kopiuj link TV</button>
+        </div>
+        <nav class="host-tabs">
+          <button class="tab active" data-tab="control">Sterowanie</button>
+          <button class="tab" data-tab="questions">Pytania</button>
+          <button class="tab" data-tab="history">Historia</button>
+        </nav>
+      </header>
+
+      <!-- ZAKŁADKA: STEROWANIE -->
+      <main id="tabControl" class="tab-panel">
+        <div class="control-grid">
+          <div class="control-main">
+            <div class="phase-bar">
+              <span class="phase-label" id="phaseLabel">Lobby</span>
+              <span class="phase-round" id="phaseRound"></span>
+              <span class="answer-timer hidden" id="answerTimer">3</span>
+            </div>
+
+            <div class="question-box card" id="questionBox">
+              <div class="question-text" id="hostQuestion">Brak aktywnego pytania</div>
+              <div class="answer-list" id="hostAnswers"></div>
+            </div>
+
+            <div class="answer-input card">
+              <label class="field-label">Odpowiedź gracza (wpisz to, co powiedział)</label>
+              <div class="answer-input-row">
+                <input id="answerInput" type="text" placeholder="np. ręcznik" autocomplete="off" />
+                <button id="submitAnswerBtn" class="btn btn-primary">Sprawdź</button>
+              </div>
+              <div class="suggestions" id="suggestions"></div>
+            </div>
+
+            <div class="actions" id="actions"></div>
+          </div>
+
+          <aside class="control-side">
+            <div class="card">
+              <h3>Buzzowanie</h3>
+              <div class="buzz-queue" id="buzzQueue">
+                <p class="muted">Brak zgłoszeń</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Gracze</h3>
+              <div class="players-list" id="playersList"></div>
+            </div>
+
+            <div class="card">
+              <h3>Wynik</h3>
+              <div class="score-row">
+                <span id="hostTeamA">Drużyna A</span>
+                <strong id="hostScoreA">0</strong>
+              </div>
+              <div class="score-row">
+                <span id="hostTeamB">Drużyna B</span>
+                <strong id="hostScoreB">0</strong>
+              </div>
+              <div class="score-row pot-row">
+                <span>Pula rundy</span>
+                <strong id="hostPot">0</strong>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Konfiguracja (lobby)</h3>
+              <label class="field-label">Nazwa drużyny A</label>
+              <input id="cfgTeamA" type="text" />
+              <label class="field-label">Nazwa drużyny B</label>
+              <input id="cfgTeamB" type="text" />
+              <label class="field-label">Próg zwycięstwa gry (pkt)</label>
+              <input id="cfgGameTarget" type="number" min="100" step="50" />
+              <label class="field-label">Próg finału (pkt)</label>
+              <input id="cfgTarget" type="number" min="50" step="10" />
+              <label class="field-label">Limit czasu odpowiedzi (s)</label>
+              <input id="cfgTimeLimit" type="number" min="1" max="30" />
+              <button id="saveConfigBtn" class="btn btn-small">Zapisz konfigurację</button>
+            </div>
+          </aside>
+        </div>
+      </main>
+
+      <!-- ZAKŁADKA: PYTANIA -->
+      <main id="tabQuestions" class="tab-panel hidden">
+        <div class="questions-toolbar">
+          <button id="newQuestionBtn" class="btn btn-primary">+ Nowe pytanie</button>
+          <button id="importBtn" class="btn">Import JSON</button>
+          <button id="exportBtn" class="btn">Eksport JSON</button>
+          <input id="importFile" type="file" accept="application/json" class="hidden" />
+          <span class="muted" id="questionsCount"></span>
+        </div>
+        <div class="questions-layout">
+          <div class="questions-list" id="questionsList"></div>
+          <div class="question-editor card" id="questionEditor">
+            <p class="muted">Wybierz pytanie z listy lub utwórz nowe</p>
+          </div>
+        </div>
+      </main>
+
+      <!-- ZAKŁADKA: HISTORIA -->
+      <main id="tabHistory" class="tab-panel hidden">
+        <div class="history-list" id="historyList"></div>
+      </main>
+    </section>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="/host/host.js"></script>
+  </body>
+</html>

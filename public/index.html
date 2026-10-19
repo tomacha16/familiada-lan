@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b1020" />
+    <title>Familiada LAN</title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="stylesheet" href="/shared/styles.css" />
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 24px;
+      }
+      .landing {
+        width: 100%;
+        max-width: 720px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+      .landing h1 {
+        margin: 0;
+        text-align: center;
+        font-size: clamp(2rem, 6vw, 3.4rem);
+        font-weight: 900;
+        letter-spacing: 0.1rem;
+        background: linear-gradient(135deg, var(--accent), #ff8a00);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .landing p {
+        margin: 0;
+        text-align: center;
+        color: var(--muted);
+      }
+      .roles {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+      }
+      .role-card {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 24px;
+        text-decoration: none;
+        color: var(--text);
+        background: var(--panel);
+        border-radius: var(--radius);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: transform 0.15s ease, border-color 0.15s ease;
+      }
+      .role-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--accent);
+      }
+      .role-icon {
+        font-size: 2rem;
+      }
+      .role-title {
+        font-weight: 800;
+        font-size: 1.1rem;
+      }
+      .role-desc {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      .demo-card {
+        border-color: rgba(255, 201, 60, 0.45);
+        background: linear-gradient(135deg, rgba(255, 201, 60, 0.14), rgba(255, 138, 0, 0.06));
+      }
+      .demo-card:hover {
+        border-color: var(--accent);
+      }
+      .join-form {
+        display: flex;
+        gap: 10px;
+      }
+      .join-form input {
+        text-transform: uppercase;
+        letter-spacing: 0.3rem;
+        text-align: center;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="landing">
+      <h1>FAMILIADA</h1>
+      <p>Gra w sieci lokalnej — wybierz swoją rolę</p>
+
+      <div class="roles">
+        <a class="role-card" href="/tv">
+          <span class="role-icon">📺</span>
+          <span class="role-title">Tablica (TV)</span>
+          <span class="role-desc">Ekran z wynikami i pytaniami na telewizorze</span>
+        </a>
+        <a class="role-card" href="/join">
+          <span class="role-icon">📱</span>
+          <span class="role-title">Gracz</span>
+          <span class="role-desc">Buzzer na telefonie — dołącz do drużyny</span>
+        </a>
+        <a class="role-card" href="/host">
+          <span class="role-icon">🎙️</span>
+          <span class="role-title">Host</span>
+          <span class="role-desc">Panel prowadzącego — sterowanie grą i pytaniami</span>
+        </a>
+        <a class="role-card demo-card" href="/demo">
+          <span class="role-icon">🤖</span>
+          <span class="role-title">Tryb demo</span>
+          <span class="role-desc">Boty rozgrywają całą grę automatycznie — zobacz, jak to działa</span>
+        </a>
+      </div>
+
+      <div class="card">
+        <p style="margin-bottom: 12px">Masz kod pokoju? Dołącz bezpośrednio:</p>
+        <form class="join-form" id="joinForm">
+          <input id="codeInput" maxlength="4" placeholder="ABCD" autocomplete="off" />
+          <button class="btn btn-primary" type="submit">Dołącz</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('codeInput').addEventListener('input', (e) => {
+        e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+      });
+      document.getElementById('joinForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const code = document.getElementById('codeInput').value.trim();
+        if (code.length === 4) {
+          window.location.href = `/join?room=${code}`;
+        }
+      });
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,698 @@
+/* ==================================================================
+   Tablica Familiady — styl inspirowany polską edycją teleturnieju.
+   Ciemnogranatowe tło, złote panele odpowiedzi, czerwone X.
+   ================================================================== */
+
+body.tv {
+  --board-bg: #050b2e;
+  --board-bg-2: #0a1445;
+  --panel: #0d1a52;
+  --panel-edge: #1c2f7a;
+  --gold: #ffc400;
+  --gold-dark: #c99700;
+  --gold-light: #ffe066;
+  --red: #e01b24;
+  --red-dark: #a30f16;
+  --blue-team: #2f6bff;
+  --red-team: #ff3b3b;
+  --white: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% -10%, #16307f 0%, transparent 55%),
+    linear-gradient(180deg, var(--board-bg-2) 0%, var(--board-bg) 100%);
+  font-family: 'Segoe UI', 'Arial Black', system-ui, sans-serif;
+  color: var(--white);
+}
+
+/* ---------------- GÓRNY PASEK ---------------- */
+
+.tv-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4vmin 3vmin;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.45), transparent);
+  border-bottom: 0.3vmin solid rgba(255, 196, 0, 0.35);
+}
+
+.tv-logo {
+  font-size: 3.4vmin;
+  font-weight: 900;
+  letter-spacing: 0.25vmin;
+  line-height: 1;
+}
+
+.logo-fam {
+  color: var(--gold);
+  text-shadow: 0 0 2vmin rgba(255, 196, 0, 0.55);
+}
+
+.logo-liada {
+  color: var(--white);
+  text-shadow: 0 0 2vmin rgba(255, 255, 255, 0.35);
+}
+
+.tv-round {
+  font-size: 1.9vmin;
+  font-weight: 800;
+  letter-spacing: 0.3vmin;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 0.7vmin 2vmin;
+  border: 0.25vmin solid rgba(255, 196, 0, 0.5);
+  border-radius: 0.8vmin;
+  background: rgba(255, 196, 0, 0.08);
+}
+
+.tv-demo-badge {
+  font-size: 1.5vmin;
+  font-weight: 900;
+  letter-spacing: 0.25vmin;
+  padding: 0.6vmin 1.6vmin;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--gold), #ff8a00);
+  color: #1a1400;
+  animation: demo-pulse 2s infinite;
+}
+
+@keyframes demo-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+/* ---------------- OBSZAR GŁÓWNY ---------------- */
+
+.tv-main {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.view {
+  position: absolute;
+  inset: 0;
+  padding: 2vmin 3vmin;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------------- LOBBY ---------------- */
+
+.lobby-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 4vmin;
+  height: 100%;
+  align-items: center;
+}
+
+.lobby-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6vmin;
+  text-align: center;
+}
+
+.lobby-qr h2 {
+  margin: 0;
+  font-size: 2.8vmin;
+  font-weight: 900;
+  letter-spacing: 0.2vmin;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.qr-frame {
+  padding: 1.4vmin;
+  border-radius: 1.6vmin;
+  background: var(--white);
+  box-shadow: 0 0 4vmin rgba(255, 196, 0, 0.35);
+}
+
+.qr-frame img {
+  display: block;
+  width: 32vmin;
+  height: 32vmin;
+}
+
+.room-code {
+  font-size: 1.8vmin;
+  letter-spacing: 0.2vmin;
+  color: #b9c4ee;
+}
+
+.room-code strong {
+  display: inline-block;
+  margin-left: 1vmin;
+  font-size: 3.6vmin;
+  letter-spacing: 0.9vmin;
+  color: var(--gold);
+  text-shadow: 0 0 2vmin rgba(255, 196, 0, 0.6);
+}
+
+.lobby-hint {
+  margin: 0;
+  font-size: 1.5vmin;
+  color: #8f9cc9;
+}
+
+.join-url {
+  font-size: 1.5vmin;
+  color: #6f9bff;
+  word-break: break-all;
+}
+
+.lobby-teams {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5vmin;
+}
+
+.team-column {
+  border-radius: 1.6vmin;
+  padding: 2vmin;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  border: 0.3vmin solid transparent;
+}
+
+.team-column.team-a {
+  border-color: var(--blue-team);
+  box-shadow: 0 0 3vmin rgba(47, 107, 255, 0.25);
+}
+
+.team-column.team-b {
+  border-color: var(--red-team);
+  box-shadow: 0 0 3vmin rgba(255, 59, 59, 0.25);
+}
+
+.team-column h3 {
+  margin: 0 0 1.6vmin;
+  font-size: 2.2vmin;
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.15vmin;
+}
+
+.team-column.team-a h3 { color: #7fa8ff; }
+.team-column.team-b h3 { color: #ff8a8a; }
+
+.team-column ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1vmin;
+}
+
+.team-column li {
+  font-size: 1.9vmin;
+  font-weight: 600;
+  padding: 1vmin 1.6vmin;
+  border-radius: 0.9vmin;
+  background: rgba(255, 255, 255, 0.07);
+  display: flex;
+  justify-content: space-between;
+}
+
+.team-column li.offline {
+  opacity: 0.35;
+}
+
+/* ---------------- PASEK PYTANIA ---------------- */
+
+.question-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8vmin;
+  padding: 1.6vmin 3vmin;
+  margin-bottom: 2vmin;
+  border-radius: 1.2vmin;
+  background: linear-gradient(180deg, #12225f, #0a1445);
+  border: 0.3vmin solid var(--panel-edge);
+  box-shadow: inset 0 0 3vmin rgba(0, 0, 0, 0.5);
+}
+
+.question-label {
+  font-size: 1.3vmin;
+  font-weight: 800;
+  letter-spacing: 0.5vmin;
+  color: var(--gold);
+  opacity: 0.85;
+}
+
+.question-text {
+  font-size: 3vmin;
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.25;
+  text-shadow: 0 0.3vmin 1vmin rgba(0, 0, 0, 0.6);
+}
+
+/* ---------------- TABLICA ODPOWIEDZI ---------------- */
+
+.board-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.board {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: minmax(0, 1fr);
+  gap: 1.4vmin;
+  align-content: stretch;
+  min-height: 0;
+}
+
+/* Pojedynczy panel odpowiedzi — złota ramka jak na tablicy */
+.answer-slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1.6vmin;
+  padding: 1.2vmin 2vmin;
+  border-radius: 0.9vmin;
+  background: linear-gradient(180deg, #0f1d5c, #08113a);
+  border: 0.35vmin solid var(--panel-edge);
+  box-shadow:
+    inset 0 0 2.5vmin rgba(0, 0, 0, 0.55),
+    0 0.4vmin 1.2vmin rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Numer pozycji — złoty kwadrat */
+.answer-slot .rank {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5.2vmin;
+  height: 5.2vmin;
+  border-radius: 0.7vmin;
+  font-size: 2.8vmin;
+  font-weight: 900;
+  color: #1a1400;
+  background: linear-gradient(180deg, var(--gold-light), var(--gold-dark));
+  box-shadow: inset 0 -0.4vmin 0 rgba(0, 0, 0, 0.25);
+}
+
+.answer-slot .text {
+  flex: 1;
+  font-size: 2.5vmin;
+  font-weight: 800;
+  letter-spacing: 0.05vmin;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Punkty — złote cyfry po prawej */
+.answer-slot .points {
+  flex: 0 0 auto;
+  min-width: 7vmin;
+  text-align: right;
+  font-size: 3vmin;
+  font-weight: 900;
+  color: var(--gold);
+  text-shadow: 0 0 1.6vmin rgba(255, 196, 0, 0.55);
+}
+
+/* Ukryta odpowiedź — same znaki zapytania */
+.answer-slot.hidden-answer .text {
+  color: #2a3a7a;
+  letter-spacing: 0.4vmin;
+}
+
+.answer-slot.hidden-answer .points {
+  color: #2a3a7a;
+  text-shadow: none;
+}
+
+/* Odkryta odpowiedź — złota poświata */
+.answer-slot.revealed {
+  border-color: var(--gold);
+  background: linear-gradient(180deg, #1a2f7d, #0d1a52);
+  box-shadow:
+    inset 0 0 2.5vmin rgba(0, 0, 0, 0.45),
+    0 0 2.5vmin rgba(255, 196, 0, 0.35);
+  animation: reveal 0.5s ease;
+}
+
+.answer-slot.revealed .text {
+  color: var(--white);
+  text-shadow: 0 0 1.2vmin rgba(255, 255, 255, 0.35);
+}
+
+@keyframes reveal {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.2;
+    filter: brightness(2.5);
+  }
+  60% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+
+/* ---------------- STRIKE (X) ---------------- */
+
+.strikes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3vmin;
+  padding: 1.4vmin 0 0.4vmin;
+  min-height: 9vmin;
+}
+
+.strike-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 7vmin;
+  height: 7vmin;
+  font-size: 5vmin;
+  font-weight: 900;
+  color: var(--red);
+  text-shadow: 0 0 2vmin rgba(224, 27, 36, 0.8);
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.strike-mark.active {
+  opacity: 1;
+  transform: scale(1);
+  animation: strike-pop 0.45s cubic-bezier(0.2, 1.6, 0.4, 1);
+}
+
+@keyframes strike-pop {
+  0% {
+    transform: scale(2.4) rotate(-18deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(0.92) rotate(4deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+/* ---------------- FACE OFF ---------------- */
+
+.faceoff {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3vmin;
+}
+
+.faceoff-title {
+  font-size: 3.4vmin;
+  font-weight: 900;
+  letter-spacing: 0.2vmin;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-shadow: 0 0 2.5vmin rgba(255, 196, 0, 0.5);
+  animation: pulse 1.4s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+.heads {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6vmin;
+  width: 62%;
+}
+
+.head-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.8vmin 2.6vmin;
+  border-radius: 1.2vmin;
+  font-size: 2.6vmin;
+  font-weight: 800;
+  background: linear-gradient(180deg, #0f1d5c, #08113a);
+  border: 0.35vmin solid var(--panel-edge);
+}
+
+.head-card.team-a {
+  border-left: 1vmin solid var(--blue-team);
+}
+
+.head-card.team-b {
+  border-left: 1vmin solid var(--red-team);
+}
+
+.head-card .head-name {
+  text-transform: uppercase;
+}
+
+.head-card .head-team {
+  font-size: 1.7vmin;
+  font-weight: 700;
+  color: #9fb0e8;
+  text-transform: uppercase;
+  letter-spacing: 0.15vmin;
+}
+
+.faceoff-result {
+  margin-top: 1.5vmin;
+  padding: 1.4vmin 2.6vmin;
+  border-radius: 1vmin;
+  background: rgba(255, 196, 0, 0.12);
+  border: 0.25vmin solid rgba(255, 196, 0, 0.45);
+  font-size: 2vmin;
+  font-weight: 700;
+  text-align: center;
+  color: var(--gold);
+}
+
+/* ---------------- PODSUMOWANIE RUNDY ---------------- */
+
+#viewSummary {
+  align-items: center;
+  justify-content: center;
+  gap: 2vmin;
+}
+
+.summary-title {
+  font-size: 3vmin;
+  font-weight: 800;
+  letter-spacing: 0.4vmin;
+  text-transform: uppercase;
+  color: #9fb0e8;
+}
+
+.summary-points {
+  font-size: 16vmin;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--gold);
+  text-shadow: 0 0 5vmin rgba(255, 196, 0, 0.6);
+}
+
+.summary-team {
+  font-size: 3vmin;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.2vmin;
+}
+
+/* ---------------- FINAŁ ---------------- */
+
+.final-title {
+  font-size: 2.8vmin;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 1.6vmin;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.2vmin;
+}
+
+.final-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1vmin;
+  overflow: hidden;
+}
+
+.final-item {
+  display: flex;
+  align-items: center;
+  gap: 2vmin;
+  padding: 1.1vmin 2vmin;
+  border-radius: 0.9vmin;
+  background: linear-gradient(180deg, #0f1d5c, #08113a);
+  border: 0.25vmin solid var(--panel-edge);
+  font-size: 1.9vmin;
+}
+
+.final-item .q {
+  flex: 1;
+  font-weight: 700;
+}
+
+.final-item .a {
+  color: var(--gold);
+  font-weight: 800;
+  text-align: right;
+}
+
+.final-item .a.pending {
+  color: #2a3a7a;
+}
+
+.final-total {
+  display: flex;
+  justify-content: center;
+  gap: 5vmin;
+  flex-wrap: wrap;
+  padding-top: 1.4vmin;
+  font-size: 2.2vmin;
+  font-weight: 700;
+}
+
+.final-total strong {
+  color: var(--gold);
+  font-size: 3.2vmin;
+}
+
+.final-total .final-sum {
+  width: 100%;
+  text-align: center;
+  font-size: 2.2vmin;
+  color: #9fb0e8;
+}
+
+/* ---------------- KONIEC GRY ---------------- */
+
+#viewGameOver {
+  align-items: center;
+  justify-content: center;
+  gap: 3vmin;
+}
+
+.gameover-title {
+  font-size: 5.5vmin;
+  font-weight: 900;
+  letter-spacing: 0.6vmin;
+  color: var(--gold);
+  text-shadow: 0 0 4vmin rgba(255, 196, 0, 0.6);
+}
+
+.gameover-winner {
+  font-size: 4vmin;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.gameover-scores {
+  display: flex;
+  gap: 7vmin;
+  font-size: 3vmin;
+  font-weight: 700;
+}
+
+.gameover-scores strong {
+  color: var(--gold);
+}
+
+/* ---------------- DOLNY PASEK ---------------- */
+
+.tv-footer {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 2vmin;
+  padding: 1.4vmin 3vmin;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.55), transparent);
+  border-top: 0.3vmin solid rgba(255, 196, 0, 0.35);
+}
+
+.score-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1vmin 2.2vmin;
+  border-radius: 1vmin;
+  font-weight: 900;
+  background: linear-gradient(180deg, #0f1d5c, #08113a);
+  border: 0.3vmin solid var(--panel-edge);
+}
+
+.score-card.team-a {
+  border-left: 0.9vmin solid var(--blue-team);
+}
+
+.score-card.team-b {
+  border-right: 0.9vmin solid var(--red-team);
+}
+
+.score-name {
+  font-size: 1.9vmin;
+  text-transform: uppercase;
+  letter-spacing: 0.1vmin;
+}
+
+.score-value {
+  font-size: 3.6vmin;
+  color: var(--gold);
+  text-shadow: 0 0 1.8vmin rgba(255, 196, 0, 0.5);
+}
+
+.bank {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3.5vmin;
+  border-radius: 1vmin;
+  background: linear-gradient(180deg, rgba(255, 196, 0, 0.16), rgba(255, 196, 0, 0.04));
+  border: 0.3vmin solid rgba(255, 196, 0, 0.5);
+}
+
+.bank-label {
+  font-size: 1.3vmin;
+  font-weight: 800;
+  letter-spacing: 0.4vmin;
+  color: var(--gold);
+  opacity: 0.85;
+}
+
+.bank-value {
+  font-size: 3.4vmin;
+  font-weight: 900;
+  color: var(--gold);
+  text-shadow: 0 0 2vmin rgba(255, 196, 0, 0.6);
+}
